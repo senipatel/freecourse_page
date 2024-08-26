@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    body {
+        background-color: #121212;
+        color: #E0E0E0;
+    }
+    .container-fluid-custom {
+        width: 100%;
+        padding: 7.5px;
+        animation: none !important;
+        transform: none !important;
+    }
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; 
+        height: 0;
+        animation: none !important;
+        transform: none !important;
+    }
+    .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .video-card,
+    .announcements .card,
+    .q-and-a .card,
+    .accordion .card {
+        border-radius: 0;
+        margin-bottom: 15px; 
+        background-color: #2a1d38; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        animation: none !important;
+        transform: none !important;
+    }
+    .video-card p, .card-body p {
+        margin: 0;
+        padding: 15px;
+        color: #E0E0E0;
+    }
+    .announcements, .q-and-a {
+        margin-top: 15px;
+    }
+    .accordion .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        background-color: #2a1d38;
+        color: #ffffff;
+    }
+    .btn-link {
+        font-weight: bold;
+        color: #BB86FC; 
+        text-decoration: none;
+    }
+    
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+    .toggle-btn {
+        position: absolute;
+        right: 35px;
+        color: #BB86FC; 
+    }
+    #announcementsButton, #qnaButton {
+        color: #09c4ff;
+        background-color: #2a1d38;
+        font-weight: bold;
+        border-radius: 0%;
+        width: 100%;
+        font-size: 16px;
+        border-bottom: 1px solid #ff8000;
+    }
+    #announcementsButton:hover, #qnaButton:hover {
+        text-decoration: underline;
+    }
+    .announcements .card,
+    .q-and-a .card {
+        background-color: #2a1d38;
+        color: #E0E0E0;
+        margin-bottom: 1rem;
+    }
+    .card-title {
+        color: #BB86FC; 
+    }
+    .text-white {
+        color: #E0E0E0 !important;
+    }
+    h3 {
+        color: #BB86FC;
+        background: linear-gradient(30deg, #995de8, #09c4ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
+</style>
+
+<div class="container-fluid container-fluid-custom mt-0 pt-0" id="mainContainer">
+    <div class="row no-gutters">
+        <!-- Main Video Section -->
+        <div class="col-lg-8 col-md-8 pr-0">
+            <div class="card mb-4 video-card">
+                <div class="card-body p-0">
+                    <div class="video-wrapper">
+                        <video id="mainVideo" controls>
+                            <source src="{{ videos.0.video_file.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="row no-gutters">
+                        <!-- Announcements -->
+                        <div class="col-md-6 pr-1">
+                            <button id="announcementsButton" class="btn" onclick="toggleSection('announcements')">Announcements</button>
+                        </div>
+                        <!-- Q&A -->
+                        <div class="col-md-6 pl-1">
+                            <button id="qnaButton" class="btn" onclick="toggleSection('qna')">Q&A</button>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="announcements mb-4" id="announcements" style="display: none;">
+                                {% for announcement in announcements %}
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ announcement.title }}</h5>
+                                        <p class="card-text">{{ announcement.content }}</p>
+                                        <p class="card-text"><small class="text-white">{{ announcement.date }}</small></p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="q-and-a mb-4" id="qna" style="display: none;">
+                                {% for question in questions %}
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Q: {{ question.question }}</h5>
+                                        <p class="card-text">A: {{ question.answer }}</p>
+                                        <p class="card-text"><small class="text-white">Asked by {{ question.user }} on {{ question.date }}</small></p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 20px;color:#ffffff">{{ course.description }}</p>
+            </div>
+        </div>
+
+        <!-- Course Content Section -->
+        <div class="col-lg-4 col-md-4 pl-0">
+            <div class="accordion mb-4" id="courseContentAccordion">
+                {% for section in course.sections.all %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <button style="font-size:18px;text-align: left;display: inline-block;max-width: 400px;color: #995de8;" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSection{{ section.id }}" aria-expanded="true" aria-controls="collapseSection{{ section.id }}">
+                                {{ section.title }}
+                            </button>
+                            <button style="color: #995de8;" class="btn btn-link toggle-btn" type="button" data-toggle="collapse" data-target="#collapseSection{{ section.id }}" aria-expanded="true" aria-controls="collapseSection{{ section.id }}">
+                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseSection{{ section.id }}" class="collapse" data-parent="#courseContentAccordion">
+                        <div class="card-body">
+                            {% for video in section.videos.all %}
+                            <div class="card">
+                                <div class="card-header" id="heading{{ video.id }}">
+                                    <h5 class="mb-0 d-flex justify-content-between align-items-center">
+                                        <button style="font-size:16px;text-align: left;display: inline-block;max-width: 400px;color: #ffffff;" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ video.id }}" aria-expanded="true" aria-controls="collapse{{ video.id }}" onclick="updateMainVideo('{{ video.video_file.url }}')">
+                                            {{ video.title }}
+                                        </button>
+                                        {% comment %} <button style="color: #995de8;" class="btn btn-link toggle-btn" type="button" data-toggle="collapse" data-target="#collapse{{ video.id }}" aria-expanded="true" aria-controls="collapse{{ video.id }}">
+                                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        </button> {% endcomment %}
+                                    </h5>
+                                </div>
+                                {% comment %} <div id="collapse{{ video.id }}" class="collapse" aria-labelledby="heading{{ video.id }}" data-parent="#collapseSection{{ section.id }}">
+                                    <div class="card-body">
+                                        <p>{{ video.description }}</p>
+                                    </div>
+                                </div> {% endcomment %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSection(sectionId) {
+        var section = document.getElementById(sectionId);
+        var otherSectionId = (sectionId === 'announcements') ? 'qna' : 'announcements';
+        var otherSection = document.getElementById(otherSectionId);
+
+        section.style.display = (section.style.display === "none") ? "block" : "none";
+        otherSection.style.display = "none";
+    }
+
+    function updateMainVideo(videoUrl) {
+        var mainVideo = document.getElementById('mainVideo');
+        mainVideo.src = videoUrl;
+        mainVideo.load();
+    }
+
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    }, false);
+</script>
+{% endblock %}

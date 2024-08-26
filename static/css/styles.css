@@ -1,0 +1,185 @@
+/* General Styles */
+body {
+    background-color: #1e1e1e;
+    font-family: 'Poppins', sans-serif;
+    color: #c5c6c7;
+    animation: none !important;
+
+}
+
+#convideo{
+background-color: #3d3349;
+color: #fff;
+font-family: 'poppins', sans-serif;
+border-radius: 0;
+
+}
+h1, h2, h3 {
+    color: #c5c6c7;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Card Styles */
+.card {
+    background-color: #1e1e1e;
+    color: #c5c6c7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    overflow: hidden;
+        border-radius: 0;
+        
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 12px;
+    color: #09c4ff; 
+}
+
+.card-text {
+    border-radius: 0;
+    flex: 1;
+    margin-bottom: 16px;
+    color: #c5c6c7;
+}
+
+
+
+#newcard{
+    color: #c5c6c7;
+    background-color:#333333; 
+    text-decoration: none;
+    padding-left: 0; 
+    padding-right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    max-width: 100%; 
+    border-radius: 0; 
+}
+
+
+#viewcourse{
+    color: #c5c6c7;
+    text-decoration: none;
+    background-color:#1e1e1e; 
+    font-weight: bold;
+}
+
+.btn-link {
+    color: #c5c6c7;
+    text-decoration: none;
+    background-color:#1e1e1e; 
+    font-weight: bold;
+}
+
+.btn-link:hover {
+    /* color: #0056b3; */
+    color: #09c4ff;
+}
+
+/* Custom Styles for Video */
+.video-card {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    /* border: 2px solid #3d3349; */
+    border-color: #3d3349;
+}
+
+
+.container-fluid {
+    padding: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.col-lg-8,
+.col-lg-4 {
+    padding: 0;
+}
+
+.announcements,
+.q-and-a {
+    margin-top: 20px;
+    width: 100%; 
+        color: #c5c6c7;
+
+}
+
+.announcements h4,
+.q-and-a h4 {
+    margin-bottom: 1rem;
+    color: #c5c6c7;
+
+}
+
+.announcements .card,
+.q-and-a .card {
+    background-color: #1e1e1e; 
+    color: #c5c6c7;
+    margin-bottom: 1rem;
+}
+
+.announcements .card-body,
+.q-and-a .card-body {
+    padding: 15px;
+    
+} 
+
+.q-and-a .card-body {
+    border-top: 1px solid #ddd; 
+}
+
+
+.announcements .card-body {
+    border-top: 1px solid #ddd; 
+}
+
+
+.logo {
+    height: 40px; 
+    margin-right: 10px;
+    /* background-color: #1e1e1e;  */
+    background-color: transparent;
+
+}
+
+.navbar {
+    background-color: #333333 !important;
+}
+
+.navbar .navbar-brand, 
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+    color: #ff9800 !important; /* Add some hover effect */
+}
+
+.logo {
+    height: 40px; 
+}
+
+
+.container-fluid {
+    padding: 10px;
+}
+
+.navbar .navbar-nav {
+    margin-left: auto;
+}
