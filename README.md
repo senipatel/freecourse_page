@@ -24,17 +24,6 @@ Built with Django and modern frontend tools, it offers a clean UI and dynamic co
 
 ---
 
-## 📂 Project Structure
-freecourse_page/ 
-├── courses/ # Django app for course models and views 
-├── media/ # Uploaded media files 
-├── static/ # Static assets (CSS, JS, images) 
-├── templates/ # HTML templates 
-├── udemy_clone/ # Django project settings 
-├── db.sqlite3 # SQLite database 
-├── manage.py # Django management script 
-├── package.json # Node.js dependencies (if applicable)
-
 ## ⚙️ Getting Started
 
 1. **Clone the repository:**
